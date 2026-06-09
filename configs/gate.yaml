@@ -1,0 +1,39 @@
+# Shared hyperparameters — identical for GlobalCBM and VisualCLARITY
+
+# --- paths ---
+dataset_path: dataset/CUB_200_2011
+dinov2_weights_path: weights/dinov2_vitb14_pretrain.pth
+cache_dir: outputs/cache
+checkpoint_dir: outputs/checkpoints
+output_dir: outputs
+
+# --- backbone ---
+backbone: vit_base_patch14_dinov2
+img_size: 224
+patch_size: 14
+num_patches: 256
+embed_dim: 768
+
+# --- concept set ---
+concepts_json: outputs/concepts.json
+concept_part_map_json: outputs/concept_part_map.json
+
+# --- concept filtering (step3) ---
+concept_min_class_prevalence: 10
+concept_max_class_prevalence: 190
+
+# --- model ---
+num_classes: 200
+top_k_patches: 8
+
+# --- training ---
+seeds: [1, 2, 3]
+epochs: 100
+batch_size: 64
+lr: 0.001
+weight_decay: 1.0e-4
+concept_loss_weight: 0.01
+lr_scheduler: cosine
+
+# --- evaluation ---
+pointing_game_tolerance: 1

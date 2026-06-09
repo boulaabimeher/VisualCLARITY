@@ -1,0 +1,1202 @@
+{
+  "part_legend": {
+    "1": "back",
+    "2": "beak",
+    "3": "belly",
+    "4": "breast",
+    "5": "crown",
+    "6": "forehead",
+    "7": "left_eye",
+    "8": "left_leg",
+    "9": "left_wing",
+    "10": "nape",
+    "11": "right_eye",
+    "12": "right_leg",
+    "13": "right_wing",
+    "14": "tail",
+    "15": "throat"
+  },
+  "num_concepts": 108,
+  "concepts": [
+    {
+      "concept_id": 0,
+      "concept_name": "has_bill_shape::dagger",
+      "group": "has_bill_shape",
+      "part_ids": [
+        2
+      ],
+      "part_names": [
+        "beak"
+      ]
+    },
+    {
+      "concept_id": 1,
+      "concept_name": "has_bill_shape::hooked_seabird",
+      "group": "has_bill_shape",
+      "part_ids": [
+        2
+      ],
+      "part_names": [
+        "beak"
+      ]
+    },
+    {
+      "concept_id": 2,
+      "concept_name": "has_bill_shape::all-purpose",
+      "group": "has_bill_shape",
+      "part_ids": [
+        2
+      ],
+      "part_names": [
+        "beak"
+      ]
+    },
+    {
+      "concept_id": 3,
+      "concept_name": "has_bill_shape::cone",
+      "group": "has_bill_shape",
+      "part_ids": [
+        2
+      ],
+      "part_names": [
+        "beak"
+      ]
+    },
+    {
+      "concept_id": 4,
+      "concept_name": "has_wing_color::brown",
+      "group": "has_wing_color",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    },
+    {
+      "concept_id": 5,
+      "concept_name": "has_wing_color::grey",
+      "group": "has_wing_color",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    },
+    {
+      "concept_id": 6,
+      "concept_name": "has_wing_color::yellow",
+      "group": "has_wing_color",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    },
+    {
+      "concept_id": 7,
+      "concept_name": "has_wing_color::black",
+      "group": "has_wing_color",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    },
+    {
+      "concept_id": 8,
+      "concept_name": "has_wing_color::white",
+      "group": "has_wing_color",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    },
+    {
+      "concept_id": 9,
+      "concept_name": "has_wing_color::buff",
+      "group": "has_wing_color",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    },
+    {
+      "concept_id": 10,
+      "concept_name": "has_upperparts_color::brown",
+      "group": "has_upperparts_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 11,
+      "concept_name": "has_upperparts_color::grey",
+      "group": "has_upperparts_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 12,
+      "concept_name": "has_upperparts_color::yellow",
+      "group": "has_upperparts_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 13,
+      "concept_name": "has_upperparts_color::black",
+      "group": "has_upperparts_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 14,
+      "concept_name": "has_upperparts_color::white",
+      "group": "has_upperparts_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 15,
+      "concept_name": "has_upperparts_color::buff",
+      "group": "has_upperparts_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 16,
+      "concept_name": "has_underparts_color::brown",
+      "group": "has_underparts_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 17,
+      "concept_name": "has_underparts_color::grey",
+      "group": "has_underparts_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 18,
+      "concept_name": "has_underparts_color::yellow",
+      "group": "has_underparts_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 19,
+      "concept_name": "has_underparts_color::black",
+      "group": "has_underparts_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 20,
+      "concept_name": "has_underparts_color::white",
+      "group": "has_underparts_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 21,
+      "concept_name": "has_underparts_color::buff",
+      "group": "has_underparts_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 22,
+      "concept_name": "has_breast_pattern::solid",
+      "group": "has_breast_pattern",
+      "part_ids": [
+        4
+      ],
+      "part_names": [
+        "breast"
+      ]
+    },
+    {
+      "concept_id": 23,
+      "concept_name": "has_breast_pattern::striped",
+      "group": "has_breast_pattern",
+      "part_ids": [
+        4
+      ],
+      "part_names": [
+        "breast"
+      ]
+    },
+    {
+      "concept_id": 24,
+      "concept_name": "has_breast_pattern::multi-colored",
+      "group": "has_breast_pattern",
+      "part_ids": [
+        4
+      ],
+      "part_names": [
+        "breast"
+      ]
+    },
+    {
+      "concept_id": 25,
+      "concept_name": "has_back_color::brown",
+      "group": "has_back_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 26,
+      "concept_name": "has_back_color::grey",
+      "group": "has_back_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 27,
+      "concept_name": "has_back_color::yellow",
+      "group": "has_back_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 28,
+      "concept_name": "has_back_color::black",
+      "group": "has_back_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 29,
+      "concept_name": "has_back_color::white",
+      "group": "has_back_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 30,
+      "concept_name": "has_back_color::buff",
+      "group": "has_back_color",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 31,
+      "concept_name": "has_tail_shape::notched_tail",
+      "group": "has_tail_shape",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 32,
+      "concept_name": "has_upper_tail_color::brown",
+      "group": "has_upper_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 33,
+      "concept_name": "has_upper_tail_color::grey",
+      "group": "has_upper_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 34,
+      "concept_name": "has_upper_tail_color::black",
+      "group": "has_upper_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 35,
+      "concept_name": "has_upper_tail_color::white",
+      "group": "has_upper_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 36,
+      "concept_name": "has_upper_tail_color::buff",
+      "group": "has_upper_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 37,
+      "concept_name": "has_head_pattern::plain",
+      "group": "has_head_pattern",
+      "part_ids": [
+        5,
+        6
+      ],
+      "part_names": [
+        "crown",
+        "forehead"
+      ]
+    },
+    {
+      "concept_id": 38,
+      "concept_name": "has_head_pattern::capped",
+      "group": "has_head_pattern",
+      "part_ids": [
+        5,
+        6
+      ],
+      "part_names": [
+        "crown",
+        "forehead"
+      ]
+    },
+    {
+      "concept_id": 39,
+      "concept_name": "has_breast_color::brown",
+      "group": "has_breast_color",
+      "part_ids": [
+        4
+      ],
+      "part_names": [
+        "breast"
+      ]
+    },
+    {
+      "concept_id": 40,
+      "concept_name": "has_breast_color::grey",
+      "group": "has_breast_color",
+      "part_ids": [
+        4
+      ],
+      "part_names": [
+        "breast"
+      ]
+    },
+    {
+      "concept_id": 41,
+      "concept_name": "has_breast_color::yellow",
+      "group": "has_breast_color",
+      "part_ids": [
+        4
+      ],
+      "part_names": [
+        "breast"
+      ]
+    },
+    {
+      "concept_id": 42,
+      "concept_name": "has_breast_color::black",
+      "group": "has_breast_color",
+      "part_ids": [
+        4
+      ],
+      "part_names": [
+        "breast"
+      ]
+    },
+    {
+      "concept_id": 43,
+      "concept_name": "has_breast_color::white",
+      "group": "has_breast_color",
+      "part_ids": [
+        4
+      ],
+      "part_names": [
+        "breast"
+      ]
+    },
+    {
+      "concept_id": 44,
+      "concept_name": "has_breast_color::buff",
+      "group": "has_breast_color",
+      "part_ids": [
+        4
+      ],
+      "part_names": [
+        "breast"
+      ]
+    },
+    {
+      "concept_id": 45,
+      "concept_name": "has_throat_color::grey",
+      "group": "has_throat_color",
+      "part_ids": [
+        15
+      ],
+      "part_names": [
+        "throat"
+      ]
+    },
+    {
+      "concept_id": 46,
+      "concept_name": "has_throat_color::yellow",
+      "group": "has_throat_color",
+      "part_ids": [
+        15
+      ],
+      "part_names": [
+        "throat"
+      ]
+    },
+    {
+      "concept_id": 47,
+      "concept_name": "has_throat_color::black",
+      "group": "has_throat_color",
+      "part_ids": [
+        15
+      ],
+      "part_names": [
+        "throat"
+      ]
+    },
+    {
+      "concept_id": 48,
+      "concept_name": "has_throat_color::white",
+      "group": "has_throat_color",
+      "part_ids": [
+        15
+      ],
+      "part_names": [
+        "throat"
+      ]
+    },
+    {
+      "concept_id": 49,
+      "concept_name": "has_eye_color::black",
+      "group": "has_eye_color",
+      "part_ids": [
+        7,
+        11
+      ],
+      "part_names": [
+        "left_eye",
+        "right_eye"
+      ]
+    },
+    {
+      "concept_id": 50,
+      "concept_name": "has_bill_length::about_the_same_as_head",
+      "group": "has_bill_length",
+      "part_ids": [
+        2
+      ],
+      "part_names": [
+        "beak"
+      ]
+    },
+    {
+      "concept_id": 51,
+      "concept_name": "has_bill_length::shorter_than_head",
+      "group": "has_bill_length",
+      "part_ids": [
+        2
+      ],
+      "part_names": [
+        "beak"
+      ]
+    },
+    {
+      "concept_id": 52,
+      "concept_name": "has_forehead_color::blue",
+      "group": "has_forehead_color",
+      "part_ids": [
+        6
+      ],
+      "part_names": [
+        "forehead"
+      ]
+    },
+    {
+      "concept_id": 53,
+      "concept_name": "has_forehead_color::brown",
+      "group": "has_forehead_color",
+      "part_ids": [
+        6
+      ],
+      "part_names": [
+        "forehead"
+      ]
+    },
+    {
+      "concept_id": 54,
+      "concept_name": "has_forehead_color::grey",
+      "group": "has_forehead_color",
+      "part_ids": [
+        6
+      ],
+      "part_names": [
+        "forehead"
+      ]
+    },
+    {
+      "concept_id": 55,
+      "concept_name": "has_forehead_color::yellow",
+      "group": "has_forehead_color",
+      "part_ids": [
+        6
+      ],
+      "part_names": [
+        "forehead"
+      ]
+    },
+    {
+      "concept_id": 56,
+      "concept_name": "has_forehead_color::black",
+      "group": "has_forehead_color",
+      "part_ids": [
+        6
+      ],
+      "part_names": [
+        "forehead"
+      ]
+    },
+    {
+      "concept_id": 57,
+      "concept_name": "has_forehead_color::white",
+      "group": "has_forehead_color",
+      "part_ids": [
+        6
+      ],
+      "part_names": [
+        "forehead"
+      ]
+    },
+    {
+      "concept_id": 58,
+      "concept_name": "has_forehead_color::red",
+      "group": "has_forehead_color",
+      "part_ids": [
+        6
+      ],
+      "part_names": [
+        "forehead"
+      ]
+    },
+    {
+      "concept_id": 59,
+      "concept_name": "has_under_tail_color::brown",
+      "group": "has_under_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 60,
+      "concept_name": "has_under_tail_color::grey",
+      "group": "has_under_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 61,
+      "concept_name": "has_under_tail_color::yellow",
+      "group": "has_under_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 62,
+      "concept_name": "has_under_tail_color::black",
+      "group": "has_under_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 63,
+      "concept_name": "has_under_tail_color::white",
+      "group": "has_under_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 64,
+      "concept_name": "has_under_tail_color::buff",
+      "group": "has_under_tail_color",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 65,
+      "concept_name": "has_nape_color::blue",
+      "group": "has_nape_color",
+      "part_ids": [
+        10
+      ],
+      "part_names": [
+        "nape"
+      ]
+    },
+    {
+      "concept_id": 66,
+      "concept_name": "has_nape_color::brown",
+      "group": "has_nape_color",
+      "part_ids": [
+        10
+      ],
+      "part_names": [
+        "nape"
+      ]
+    },
+    {
+      "concept_id": 67,
+      "concept_name": "has_nape_color::grey",
+      "group": "has_nape_color",
+      "part_ids": [
+        10
+      ],
+      "part_names": [
+        "nape"
+      ]
+    },
+    {
+      "concept_id": 68,
+      "concept_name": "has_nape_color::yellow",
+      "group": "has_nape_color",
+      "part_ids": [
+        10
+      ],
+      "part_names": [
+        "nape"
+      ]
+    },
+    {
+      "concept_id": 69,
+      "concept_name": "has_nape_color::black",
+      "group": "has_nape_color",
+      "part_ids": [
+        10
+      ],
+      "part_names": [
+        "nape"
+      ]
+    },
+    {
+      "concept_id": 70,
+      "concept_name": "has_nape_color::white",
+      "group": "has_nape_color",
+      "part_ids": [
+        10
+      ],
+      "part_names": [
+        "nape"
+      ]
+    },
+    {
+      "concept_id": 71,
+      "concept_name": "has_nape_color::buff",
+      "group": "has_nape_color",
+      "part_ids": [
+        10
+      ],
+      "part_names": [
+        "nape"
+      ]
+    },
+    {
+      "concept_id": 72,
+      "concept_name": "has_belly_color::grey",
+      "group": "has_belly_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 73,
+      "concept_name": "has_belly_color::yellow",
+      "group": "has_belly_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 74,
+      "concept_name": "has_belly_color::black",
+      "group": "has_belly_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 75,
+      "concept_name": "has_belly_color::white",
+      "group": "has_belly_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 76,
+      "concept_name": "has_belly_color::buff",
+      "group": "has_belly_color",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 77,
+      "concept_name": "has_wing_shape::rounded-wings",
+      "group": "has_wing_shape",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    },
+    {
+      "concept_id": 78,
+      "concept_name": "has_size::small_(5_-_9_in)",
+      "group": "has_size",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 79,
+      "concept_name": "has_size::medium_(9_-_16_in)",
+      "group": "has_size",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 80,
+      "concept_name": "has_size::very_small_(3_-_5_in)",
+      "group": "has_size",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 81,
+      "concept_name": "has_shape::perching-like",
+      "group": "has_shape",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 82,
+      "concept_name": "has_back_pattern::solid",
+      "group": "has_back_pattern",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 83,
+      "concept_name": "has_back_pattern::striped",
+      "group": "has_back_pattern",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 84,
+      "concept_name": "has_back_pattern::multi-colored",
+      "group": "has_back_pattern",
+      "part_ids": [
+        1
+      ],
+      "part_names": [
+        "back"
+      ]
+    },
+    {
+      "concept_id": 85,
+      "concept_name": "has_tail_pattern::solid",
+      "group": "has_tail_pattern",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 86,
+      "concept_name": "has_tail_pattern::multi-colored",
+      "group": "has_tail_pattern",
+      "part_ids": [
+        14
+      ],
+      "part_names": [
+        "tail"
+      ]
+    },
+    {
+      "concept_id": 87,
+      "concept_name": "has_belly_pattern::solid",
+      "group": "has_belly_pattern",
+      "part_ids": [
+        3
+      ],
+      "part_names": [
+        "belly"
+      ]
+    },
+    {
+      "concept_id": 88,
+      "concept_name": "has_primary_color::brown",
+      "group": "has_primary_color",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 89,
+      "concept_name": "has_primary_color::grey",
+      "group": "has_primary_color",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 90,
+      "concept_name": "has_primary_color::yellow",
+      "group": "has_primary_color",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 91,
+      "concept_name": "has_primary_color::black",
+      "group": "has_primary_color",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 92,
+      "concept_name": "has_primary_color::white",
+      "group": "has_primary_color",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 93,
+      "concept_name": "has_primary_color::buff",
+      "group": "has_primary_color",
+      "part_ids": [],
+      "part_names": []
+    },
+    {
+      "concept_id": 94,
+      "concept_name": "has_leg_color::grey",
+      "group": "has_leg_color",
+      "part_ids": [
+        8,
+        12
+      ],
+      "part_names": [
+        "left_leg",
+        "right_leg"
+      ]
+    },
+    {
+      "concept_id": 95,
+      "concept_name": "has_leg_color::black",
+      "group": "has_leg_color",
+      "part_ids": [
+        8,
+        12
+      ],
+      "part_names": [
+        "left_leg",
+        "right_leg"
+      ]
+    },
+    {
+      "concept_id": 96,
+      "concept_name": "has_leg_color::buff",
+      "group": "has_leg_color",
+      "part_ids": [
+        8,
+        12
+      ],
+      "part_names": [
+        "left_leg",
+        "right_leg"
+      ]
+    },
+    {
+      "concept_id": 97,
+      "concept_name": "has_bill_color::grey",
+      "group": "has_bill_color",
+      "part_ids": [
+        2
+      ],
+      "part_names": [
+        "beak"
+      ]
+    },
+    {
+      "concept_id": 98,
+      "concept_name": "has_bill_color::black",
+      "group": "has_bill_color",
+      "part_ids": [
+        2
+      ],
+      "part_names": [
+        "beak"
+      ]
+    },
+    {
+      "concept_id": 99,
+      "concept_name": "has_crown_color::blue",
+      "group": "has_crown_color",
+      "part_ids": [
+        5
+      ],
+      "part_names": [
+        "crown"
+      ]
+    },
+    {
+      "concept_id": 100,
+      "concept_name": "has_crown_color::brown",
+      "group": "has_crown_color",
+      "part_ids": [
+        5
+      ],
+      "part_names": [
+        "crown"
+      ]
+    },
+    {
+      "concept_id": 101,
+      "concept_name": "has_crown_color::grey",
+      "group": "has_crown_color",
+      "part_ids": [
+        5
+      ],
+      "part_names": [
+        "crown"
+      ]
+    },
+    {
+      "concept_id": 102,
+      "concept_name": "has_crown_color::yellow",
+      "group": "has_crown_color",
+      "part_ids": [
+        5
+      ],
+      "part_names": [
+        "crown"
+      ]
+    },
+    {
+      "concept_id": 103,
+      "concept_name": "has_crown_color::black",
+      "group": "has_crown_color",
+      "part_ids": [
+        5
+      ],
+      "part_names": [
+        "crown"
+      ]
+    },
+    {
+      "concept_id": 104,
+      "concept_name": "has_crown_color::white",
+      "group": "has_crown_color",
+      "part_ids": [
+        5
+      ],
+      "part_names": [
+        "crown"
+      ]
+    },
+    {
+      "concept_id": 105,
+      "concept_name": "has_wing_pattern::solid",
+      "group": "has_wing_pattern",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    },
+    {
+      "concept_id": 106,
+      "concept_name": "has_wing_pattern::striped",
+      "group": "has_wing_pattern",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    },
+    {
+      "concept_id": 107,
+      "concept_name": "has_wing_pattern::multi-colored",
+      "group": "has_wing_pattern",
+      "part_ids": [
+        9,
+        13
+      ],
+      "part_names": [
+        "left_wing",
+        "right_wing"
+      ]
+    }
+  ]
+}

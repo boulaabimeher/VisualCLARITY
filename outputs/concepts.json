@@ -1,0 +1,982 @@
+{
+  "num_concepts": 108,
+  "filter": {
+    "min_class_prevalence": 10,
+    "max_class_prevalence": 190,
+    "description": "Attribute retained if it is the dominant value (>50% annotators) for >= 10 and <= 190 out of 200 classes."
+  },
+  "concepts": [
+    {
+      "concept_id": 0,
+      "attr_id_1indexed": 2,
+      "attr_id_0indexed": 1,
+      "name": "has_bill_shape::dagger",
+      "group": "has_bill_shape",
+      "value": "dagger",
+      "n_classes_present": 15
+    },
+    {
+      "concept_id": 1,
+      "attr_id_1indexed": 5,
+      "attr_id_0indexed": 4,
+      "name": "has_bill_shape::hooked_seabird",
+      "group": "has_bill_shape",
+      "value": "hooked_seabird",
+      "n_classes_present": 15
+    },
+    {
+      "concept_id": 2,
+      "attr_id_1indexed": 7,
+      "attr_id_0indexed": 6,
+      "name": "has_bill_shape::all-purpose",
+      "group": "has_bill_shape",
+      "value": "all-purpose",
+      "n_classes_present": 77
+    },
+    {
+      "concept_id": 3,
+      "attr_id_1indexed": 8,
+      "attr_id_0indexed": 7,
+      "name": "has_bill_shape::cone",
+      "group": "has_bill_shape",
+      "value": "cone",
+      "n_classes_present": 45
+    },
+    {
+      "concept_id": 4,
+      "attr_id_1indexed": 11,
+      "attr_id_0indexed": 10,
+      "name": "has_wing_color::brown",
+      "group": "has_wing_color",
+      "value": "brown",
+      "n_classes_present": 46
+    },
+    {
+      "concept_id": 5,
+      "attr_id_1indexed": 15,
+      "attr_id_0indexed": 14,
+      "name": "has_wing_color::grey",
+      "group": "has_wing_color",
+      "value": "grey",
+      "n_classes_present": 46
+    },
+    {
+      "concept_id": 6,
+      "attr_id_1indexed": 16,
+      "attr_id_0indexed": 15,
+      "name": "has_wing_color::yellow",
+      "group": "has_wing_color",
+      "value": "yellow",
+      "n_classes_present": 12
+    },
+    {
+      "concept_id": 7,
+      "attr_id_1indexed": 21,
+      "attr_id_0indexed": 20,
+      "name": "has_wing_color::black",
+      "group": "has_wing_color",
+      "value": "black",
+      "n_classes_present": 82
+    },
+    {
+      "concept_id": 8,
+      "attr_id_1indexed": 22,
+      "attr_id_0indexed": 21,
+      "name": "has_wing_color::white",
+      "group": "has_wing_color",
+      "value": "white",
+      "n_classes_present": 38
+    },
+    {
+      "concept_id": 9,
+      "attr_id_1indexed": 24,
+      "attr_id_0indexed": 23,
+      "name": "has_wing_color::buff",
+      "group": "has_wing_color",
+      "value": "buff",
+      "n_classes_present": 20
+    },
+    {
+      "concept_id": 10,
+      "attr_id_1indexed": 26,
+      "attr_id_0indexed": 25,
+      "name": "has_upperparts_color::brown",
+      "group": "has_upperparts_color",
+      "value": "brown",
+      "n_classes_present": 47
+    },
+    {
+      "concept_id": 11,
+      "attr_id_1indexed": 30,
+      "attr_id_0indexed": 29,
+      "name": "has_upperparts_color::grey",
+      "group": "has_upperparts_color",
+      "value": "grey",
+      "n_classes_present": 47
+    },
+    {
+      "concept_id": 12,
+      "attr_id_1indexed": 31,
+      "attr_id_0indexed": 30,
+      "name": "has_upperparts_color::yellow",
+      "group": "has_upperparts_color",
+      "value": "yellow",
+      "n_classes_present": 17
+    },
+    {
+      "concept_id": 13,
+      "attr_id_1indexed": 36,
+      "attr_id_0indexed": 35,
+      "name": "has_upperparts_color::black",
+      "group": "has_upperparts_color",
+      "value": "black",
+      "n_classes_present": 75
+    },
+    {
+      "concept_id": 14,
+      "attr_id_1indexed": 37,
+      "attr_id_0indexed": 36,
+      "name": "has_upperparts_color::white",
+      "group": "has_upperparts_color",
+      "value": "white",
+      "n_classes_present": 34
+    },
+    {
+      "concept_id": 15,
+      "attr_id_1indexed": 39,
+      "attr_id_0indexed": 38,
+      "name": "has_upperparts_color::buff",
+      "group": "has_upperparts_color",
+      "value": "buff",
+      "n_classes_present": 25
+    },
+    {
+      "concept_id": 16,
+      "attr_id_1indexed": 41,
+      "attr_id_0indexed": 40,
+      "name": "has_underparts_color::brown",
+      "group": "has_underparts_color",
+      "value": "brown",
+      "n_classes_present": 12
+    },
+    {
+      "concept_id": 17,
+      "attr_id_1indexed": 45,
+      "attr_id_0indexed": 44,
+      "name": "has_underparts_color::grey",
+      "group": "has_underparts_color",
+      "value": "grey",
+      "n_classes_present": 15
+    },
+    {
+      "concept_id": 18,
+      "attr_id_1indexed": 46,
+      "attr_id_0indexed": 45,
+      "name": "has_underparts_color::yellow",
+      "group": "has_underparts_color",
+      "value": "yellow",
+      "n_classes_present": 29
+    },
+    {
+      "concept_id": 19,
+      "attr_id_1indexed": 51,
+      "attr_id_0indexed": 50,
+      "name": "has_underparts_color::black",
+      "group": "has_underparts_color",
+      "value": "black",
+      "n_classes_present": 30
+    },
+    {
+      "concept_id": 20,
+      "attr_id_1indexed": 52,
+      "attr_id_0indexed": 51,
+      "name": "has_underparts_color::white",
+      "group": "has_underparts_color",
+      "value": "white",
+      "n_classes_present": 91
+    },
+    {
+      "concept_id": 21,
+      "attr_id_1indexed": 54,
+      "attr_id_0indexed": 53,
+      "name": "has_underparts_color::buff",
+      "group": "has_underparts_color",
+      "value": "buff",
+      "n_classes_present": 22
+    },
+    {
+      "concept_id": 22,
+      "attr_id_1indexed": 55,
+      "attr_id_0indexed": 54,
+      "name": "has_breast_pattern::solid",
+      "group": "has_breast_pattern",
+      "value": "solid",
+      "n_classes_present": 130
+    },
+    {
+      "concept_id": 23,
+      "attr_id_1indexed": 57,
+      "attr_id_0indexed": 56,
+      "name": "has_breast_pattern::striped",
+      "group": "has_breast_pattern",
+      "value": "striped",
+      "n_classes_present": 10
+    },
+    {
+      "concept_id": 24,
+      "attr_id_1indexed": 58,
+      "attr_id_0indexed": 57,
+      "name": "has_breast_pattern::multi-colored",
+      "group": "has_breast_pattern",
+      "value": "multi-colored",
+      "n_classes_present": 11
+    },
+    {
+      "concept_id": 25,
+      "attr_id_1indexed": 60,
+      "attr_id_0indexed": 59,
+      "name": "has_back_color::brown",
+      "group": "has_back_color",
+      "value": "brown",
+      "n_classes_present": 39
+    },
+    {
+      "concept_id": 26,
+      "attr_id_1indexed": 64,
+      "attr_id_0indexed": 63,
+      "name": "has_back_color::grey",
+      "group": "has_back_color",
+      "value": "grey",
+      "n_classes_present": 42
+    },
+    {
+      "concept_id": 27,
+      "attr_id_1indexed": 65,
+      "attr_id_0indexed": 64,
+      "name": "has_back_color::yellow",
+      "group": "has_back_color",
+      "value": "yellow",
+      "n_classes_present": 12
+    },
+    {
+      "concept_id": 28,
+      "attr_id_1indexed": 70,
+      "attr_id_0indexed": 69,
+      "name": "has_back_color::black",
+      "group": "has_back_color",
+      "value": "black",
+      "n_classes_present": 58
+    },
+    {
+      "concept_id": 29,
+      "attr_id_1indexed": 71,
+      "attr_id_0indexed": 70,
+      "name": "has_back_color::white",
+      "group": "has_back_color",
+      "value": "white",
+      "n_classes_present": 21
+    },
+    {
+      "concept_id": 30,
+      "attr_id_1indexed": 73,
+      "attr_id_0indexed": 72,
+      "name": "has_back_color::buff",
+      "group": "has_back_color",
+      "value": "buff",
+      "n_classes_present": 20
+    },
+    {
+      "concept_id": 31,
+      "attr_id_1indexed": 76,
+      "attr_id_0indexed": 75,
+      "name": "has_tail_shape::notched_tail",
+      "group": "has_tail_shape",
+      "value": "notched_tail",
+      "n_classes_present": 47
+    },
+    {
+      "concept_id": 32,
+      "attr_id_1indexed": 81,
+      "attr_id_0indexed": 80,
+      "name": "has_upper_tail_color::brown",
+      "group": "has_upper_tail_color",
+      "value": "brown",
+      "n_classes_present": 30
+    },
+    {
+      "concept_id": 33,
+      "attr_id_1indexed": 85,
+      "attr_id_0indexed": 84,
+      "name": "has_upper_tail_color::grey",
+      "group": "has_upper_tail_color",
+      "value": "grey",
+      "n_classes_present": 27
+    },
+    {
+      "concept_id": 34,
+      "attr_id_1indexed": 91,
+      "attr_id_0indexed": 90,
+      "name": "has_upper_tail_color::black",
+      "group": "has_upper_tail_color",
+      "value": "black",
+      "n_classes_present": 56
+    },
+    {
+      "concept_id": 35,
+      "attr_id_1indexed": 92,
+      "attr_id_0indexed": 91,
+      "name": "has_upper_tail_color::white",
+      "group": "has_upper_tail_color",
+      "value": "white",
+      "n_classes_present": 23
+    },
+    {
+      "concept_id": 36,
+      "attr_id_1indexed": 94,
+      "attr_id_0indexed": 93,
+      "name": "has_upper_tail_color::buff",
+      "group": "has_upper_tail_color",
+      "value": "buff",
+      "n_classes_present": 12
+    },
+    {
+      "concept_id": 37,
+      "attr_id_1indexed": 102,
+      "attr_id_0indexed": 101,
+      "name": "has_head_pattern::plain",
+      "group": "has_head_pattern",
+      "value": "plain",
+      "n_classes_present": 40
+    },
+    {
+      "concept_id": 38,
+      "attr_id_1indexed": 105,
+      "attr_id_0indexed": 104,
+      "name": "has_head_pattern::capped",
+      "group": "has_head_pattern",
+      "value": "capped",
+      "n_classes_present": 10
+    },
+    {
+      "concept_id": 39,
+      "attr_id_1indexed": 107,
+      "attr_id_0indexed": 106,
+      "name": "has_breast_color::brown",
+      "group": "has_breast_color",
+      "value": "brown",
+      "n_classes_present": 12
+    },
+    {
+      "concept_id": 40,
+      "attr_id_1indexed": 111,
+      "attr_id_0indexed": 110,
+      "name": "has_breast_color::grey",
+      "group": "has_breast_color",
+      "value": "grey",
+      "n_classes_present": 14
+    },
+    {
+      "concept_id": 41,
+      "attr_id_1indexed": 112,
+      "attr_id_0indexed": 111,
+      "name": "has_breast_color::yellow",
+      "group": "has_breast_color",
+      "value": "yellow",
+      "n_classes_present": 26
+    },
+    {
+      "concept_id": 42,
+      "attr_id_1indexed": 117,
+      "attr_id_0indexed": 116,
+      "name": "has_breast_color::black",
+      "group": "has_breast_color",
+      "value": "black",
+      "n_classes_present": 36
+    },
+    {
+      "concept_id": 43,
+      "attr_id_1indexed": 118,
+      "attr_id_0indexed": 117,
+      "name": "has_breast_color::white",
+      "group": "has_breast_color",
+      "value": "white",
+      "n_classes_present": 74
+    },
+    {
+      "concept_id": 44,
+      "attr_id_1indexed": 120,
+      "attr_id_0indexed": 119,
+      "name": "has_breast_color::buff",
+      "group": "has_breast_color",
+      "value": "buff",
+      "n_classes_present": 16
+    },
+    {
+      "concept_id": 45,
+      "attr_id_1indexed": 126,
+      "attr_id_0indexed": 125,
+      "name": "has_throat_color::grey",
+      "group": "has_throat_color",
+      "value": "grey",
+      "n_classes_present": 10
+    },
+    {
+      "concept_id": 46,
+      "attr_id_1indexed": 127,
+      "attr_id_0indexed": 126,
+      "name": "has_throat_color::yellow",
+      "group": "has_throat_color",
+      "value": "yellow",
+      "n_classes_present": 21
+    },
+    {
+      "concept_id": 47,
+      "attr_id_1indexed": 132,
+      "attr_id_0indexed": 131,
+      "name": "has_throat_color::black",
+      "group": "has_throat_color",
+      "value": "black",
+      "n_classes_present": 39
+    },
+    {
+      "concept_id": 48,
+      "attr_id_1indexed": 133,
+      "attr_id_0indexed": 132,
+      "name": "has_throat_color::white",
+      "group": "has_throat_color",
+      "value": "white",
+      "n_classes_present": 70
+    },
+    {
+      "concept_id": 49,
+      "attr_id_1indexed": 146,
+      "attr_id_0indexed": 145,
+      "name": "has_eye_color::black",
+      "group": "has_eye_color",
+      "value": "black",
+      "n_classes_present": 190
+    },
+    {
+      "concept_id": 50,
+      "attr_id_1indexed": 150,
+      "attr_id_0indexed": 149,
+      "name": "has_bill_length::about_the_same_as_head",
+      "group": "has_bill_length",
+      "value": "about_the_same_as_head",
+      "n_classes_present": 68
+    },
+    {
+      "concept_id": 51,
+      "attr_id_1indexed": 152,
+      "attr_id_0indexed": 151,
+      "name": "has_bill_length::shorter_than_head",
+      "group": "has_bill_length",
+      "value": "shorter_than_head",
+      "n_classes_present": 124
+    },
+    {
+      "concept_id": 52,
+      "attr_id_1indexed": 153,
+      "attr_id_0indexed": 152,
+      "name": "has_forehead_color::blue",
+      "group": "has_forehead_color",
+      "value": "blue",
+      "n_classes_present": 10
+    },
+    {
+      "concept_id": 53,
+      "attr_id_1indexed": 154,
+      "attr_id_0indexed": 153,
+      "name": "has_forehead_color::brown",
+      "group": "has_forehead_color",
+      "value": "brown",
+      "n_classes_present": 22
+    },
+    {
+      "concept_id": 54,
+      "attr_id_1indexed": 158,
+      "attr_id_0indexed": 157,
+      "name": "has_forehead_color::grey",
+      "group": "has_forehead_color",
+      "value": "grey",
+      "n_classes_present": 17
+    },
+    {
+      "concept_id": 55,
+      "attr_id_1indexed": 159,
+      "attr_id_0indexed": 158,
+      "name": "has_forehead_color::yellow",
+      "group": "has_forehead_color",
+      "value": "yellow",
+      "n_classes_present": 15
+    },
+    {
+      "concept_id": 56,
+      "attr_id_1indexed": 164,
+      "attr_id_0indexed": 163,
+      "name": "has_forehead_color::black",
+      "group": "has_forehead_color",
+      "value": "black",
+      "n_classes_present": 60
+    },
+    {
+      "concept_id": 57,
+      "attr_id_1indexed": 165,
+      "attr_id_0indexed": 164,
+      "name": "has_forehead_color::white",
+      "group": "has_forehead_color",
+      "value": "white",
+      "n_classes_present": 17
+    },
+    {
+      "concept_id": 58,
+      "attr_id_1indexed": 166,
+      "attr_id_0indexed": 165,
+      "name": "has_forehead_color::red",
+      "group": "has_forehead_color",
+      "value": "red",
+      "n_classes_present": 10
+    },
+    {
+      "concept_id": 59,
+      "attr_id_1indexed": 169,
+      "attr_id_0indexed": 168,
+      "name": "has_under_tail_color::brown",
+      "group": "has_under_tail_color",
+      "value": "brown",
+      "n_classes_present": 21
+    },
+    {
+      "concept_id": 60,
+      "attr_id_1indexed": 173,
+      "attr_id_0indexed": 172,
+      "name": "has_under_tail_color::grey",
+      "group": "has_under_tail_color",
+      "value": "grey",
+      "n_classes_present": 20
+    },
+    {
+      "concept_id": 61,
+      "attr_id_1indexed": 174,
+      "attr_id_0indexed": 173,
+      "name": "has_under_tail_color::yellow",
+      "group": "has_under_tail_color",
+      "value": "yellow",
+      "n_classes_present": 10
+    },
+    {
+      "concept_id": 62,
+      "attr_id_1indexed": 179,
+      "attr_id_0indexed": 178,
+      "name": "has_under_tail_color::black",
+      "group": "has_under_tail_color",
+      "value": "black",
+      "n_classes_present": 68
+    },
+    {
+      "concept_id": 63,
+      "attr_id_1indexed": 180,
+      "attr_id_0indexed": 179,
+      "name": "has_under_tail_color::white",
+      "group": "has_under_tail_color",
+      "value": "white",
+      "n_classes_present": 29
+    },
+    {
+      "concept_id": 64,
+      "attr_id_1indexed": 182,
+      "attr_id_0indexed": 181,
+      "name": "has_under_tail_color::buff",
+      "group": "has_under_tail_color",
+      "value": "buff",
+      "n_classes_present": 10
+    },
+    {
+      "concept_id": 65,
+      "attr_id_1indexed": 183,
+      "attr_id_0indexed": 182,
+      "name": "has_nape_color::blue",
+      "group": "has_nape_color",
+      "value": "blue",
+      "n_classes_present": 10
+    },
+    {
+      "concept_id": 66,
+      "attr_id_1indexed": 184,
+      "attr_id_0indexed": 183,
+      "name": "has_nape_color::brown",
+      "group": "has_nape_color",
+      "value": "brown",
+      "n_classes_present": 24
+    },
+    {
+      "concept_id": 67,
+      "attr_id_1indexed": 188,
+      "attr_id_0indexed": 187,
+      "name": "has_nape_color::grey",
+      "group": "has_nape_color",
+      "value": "grey",
+      "n_classes_present": 32
+    },
+    {
+      "concept_id": 68,
+      "attr_id_1indexed": 189,
+      "attr_id_0indexed": 188,
+      "name": "has_nape_color::yellow",
+      "group": "has_nape_color",
+      "value": "yellow",
+      "n_classes_present": 12
+    },
+    {
+      "concept_id": 69,
+      "attr_id_1indexed": 194,
+      "attr_id_0indexed": 193,
+      "name": "has_nape_color::black",
+      "group": "has_nape_color",
+      "value": "black",
+      "n_classes_present": 44
+    },
+    {
+      "concept_id": 70,
+      "attr_id_1indexed": 195,
+      "attr_id_0indexed": 194,
+      "name": "has_nape_color::white",
+      "group": "has_nape_color",
+      "value": "white",
+      "n_classes_present": 35
+    },
+    {
+      "concept_id": 71,
+      "attr_id_1indexed": 197,
+      "attr_id_0indexed": 196,
+      "name": "has_nape_color::buff",
+      "group": "has_nape_color",
+      "value": "buff",
+      "n_classes_present": 16
+    },
+    {
+      "concept_id": 72,
+      "attr_id_1indexed": 203,
+      "attr_id_0indexed": 202,
+      "name": "has_belly_color::grey",
+      "group": "has_belly_color",
+      "value": "grey",
+      "n_classes_present": 14
+    },
+    {
+      "concept_id": 73,
+      "attr_id_1indexed": 204,
+      "attr_id_0indexed": 203,
+      "name": "has_belly_color::yellow",
+      "group": "has_belly_color",
+      "value": "yellow",
+      "n_classes_present": 27
+    },
+    {
+      "concept_id": 74,
+      "attr_id_1indexed": 209,
+      "attr_id_0indexed": 208,
+      "name": "has_belly_color::black",
+      "group": "has_belly_color",
+      "value": "black",
+      "n_classes_present": 23
+    },
+    {
+      "concept_id": 75,
+      "attr_id_1indexed": 210,
+      "attr_id_0indexed": 209,
+      "name": "has_belly_color::white",
+      "group": "has_belly_color",
+      "value": "white",
+      "n_classes_present": 84
+    },
+    {
+      "concept_id": 76,
+      "attr_id_1indexed": 212,
+      "attr_id_0indexed": 211,
+      "name": "has_belly_color::buff",
+      "group": "has_belly_color",
+      "value": "buff",
+      "n_classes_present": 17
+    },
+    {
+      "concept_id": 77,
+      "attr_id_1indexed": 213,
+      "attr_id_0indexed": 212,
+      "name": "has_wing_shape::rounded-wings",
+      "group": "has_wing_shape",
+      "value": "rounded-wings",
+      "n_classes_present": 84
+    },
+    {
+      "concept_id": 78,
+      "attr_id_1indexed": 219,
+      "attr_id_0indexed": 218,
+      "name": "has_size::small_(5_-_9_in)",
+      "group": "has_size",
+      "value": "small_(5_-_9_in)",
+      "n_classes_present": 127
+    },
+    {
+      "concept_id": 79,
+      "attr_id_1indexed": 221,
+      "attr_id_0indexed": 220,
+      "name": "has_size::medium_(9_-_16_in)",
+      "group": "has_size",
+      "value": "medium_(9_-_16_in)",
+      "n_classes_present": 37
+    },
+    {
+      "concept_id": 80,
+      "attr_id_1indexed": 222,
+      "attr_id_0indexed": 221,
+      "name": "has_size::very_small_(3_-_5_in)",
+      "group": "has_size",
+      "value": "very_small_(3_-_5_in)",
+      "n_classes_present": 14
+    },
+    {
+      "concept_id": 81,
+      "attr_id_1indexed": 236,
+      "attr_id_0indexed": 235,
+      "name": "has_shape::perching-like",
+      "group": "has_shape",
+      "value": "perching-like",
+      "n_classes_present": 120
+    },
+    {
+      "concept_id": 82,
+      "attr_id_1indexed": 237,
+      "attr_id_0indexed": 236,
+      "name": "has_back_pattern::solid",
+      "group": "has_back_pattern",
+      "value": "solid",
+      "n_classes_present": 92
+    },
+    {
+      "concept_id": 83,
+      "attr_id_1indexed": 239,
+      "attr_id_0indexed": 238,
+      "name": "has_back_pattern::striped",
+      "group": "has_back_pattern",
+      "value": "striped",
+      "n_classes_present": 24
+    },
+    {
+      "concept_id": 84,
+      "attr_id_1indexed": 240,
+      "attr_id_0indexed": 239,
+      "name": "has_back_pattern::multi-colored",
+      "group": "has_back_pattern",
+      "value": "multi-colored",
+      "n_classes_present": 13
+    },
+    {
+      "concept_id": 85,
+      "attr_id_1indexed": 241,
+      "attr_id_0indexed": 240,
+      "name": "has_tail_pattern::solid",
+      "group": "has_tail_pattern",
+      "value": "solid",
+      "n_classes_present": 83
+    },
+    {
+      "concept_id": 86,
+      "attr_id_1indexed": 244,
+      "attr_id_0indexed": 243,
+      "name": "has_tail_pattern::multi-colored",
+      "group": "has_tail_pattern",
+      "value": "multi-colored",
+      "n_classes_present": 20
+    },
+    {
+      "concept_id": 87,
+      "attr_id_1indexed": 245,
+      "attr_id_0indexed": 244,
+      "name": "has_belly_pattern::solid",
+      "group": "has_belly_pattern",
+      "value": "solid",
+      "n_classes_present": 152
+    },
+    {
+      "concept_id": 88,
+      "attr_id_1indexed": 250,
+      "attr_id_0indexed": 249,
+      "name": "has_primary_color::brown",
+      "group": "has_primary_color",
+      "value": "brown",
+      "n_classes_present": 33
+    },
+    {
+      "concept_id": 89,
+      "attr_id_1indexed": 254,
+      "attr_id_0indexed": 253,
+      "name": "has_primary_color::grey",
+      "group": "has_primary_color",
+      "value": "grey",
+      "n_classes_present": 35
+    },
+    {
+      "concept_id": 90,
+      "attr_id_1indexed": 255,
+      "attr_id_0indexed": 254,
+      "name": "has_primary_color::yellow",
+      "group": "has_primary_color",
+      "value": "yellow",
+      "n_classes_present": 28
+    },
+    {
+      "concept_id": 91,
+      "attr_id_1indexed": 260,
+      "attr_id_0indexed": 259,
+      "name": "has_primary_color::black",
+      "group": "has_primary_color",
+      "value": "black",
+      "n_classes_present": 48
+    },
+    {
+      "concept_id": 92,
+      "attr_id_1indexed": 261,
+      "attr_id_0indexed": 260,
+      "name": "has_primary_color::white",
+      "group": "has_primary_color",
+      "value": "white",
+      "n_classes_present": 40
+    },
+    {
+      "concept_id": 93,
+      "attr_id_1indexed": 263,
+      "attr_id_0indexed": 262,
+      "name": "has_primary_color::buff",
+      "group": "has_primary_color",
+      "value": "buff",
+      "n_classes_present": 18
+    },
+    {
+      "concept_id": 94,
+      "attr_id_1indexed": 269,
+      "attr_id_0indexed": 268,
+      "name": "has_leg_color::grey",
+      "group": "has_leg_color",
+      "value": "grey",
+      "n_classes_present": 38
+    },
+    {
+      "concept_id": 95,
+      "attr_id_1indexed": 275,
+      "attr_id_0indexed": 274,
+      "name": "has_leg_color::black",
+      "group": "has_leg_color",
+      "value": "black",
+      "n_classes_present": 53
+    },
+    {
+      "concept_id": 96,
+      "attr_id_1indexed": 278,
+      "attr_id_0indexed": 277,
+      "name": "has_leg_color::buff",
+      "group": "has_leg_color",
+      "value": "buff",
+      "n_classes_present": 19
+    },
+    {
+      "concept_id": 97,
+      "attr_id_1indexed": 284,
+      "attr_id_0indexed": 283,
+      "name": "has_bill_color::grey",
+      "group": "has_bill_color",
+      "value": "grey",
+      "n_classes_present": 18
+    },
+    {
+      "concept_id": 98,
+      "attr_id_1indexed": 290,
+      "attr_id_0indexed": 289,
+      "name": "has_bill_color::black",
+      "group": "has_bill_color",
+      "value": "black",
+      "n_classes_present": 94
+    },
+    {
+      "concept_id": 99,
+      "attr_id_1indexed": 294,
+      "attr_id_0indexed": 293,
+      "name": "has_crown_color::blue",
+      "group": "has_crown_color",
+      "value": "blue",
+      "n_classes_present": 10
+    },
+    {
+      "concept_id": 100,
+      "attr_id_1indexed": 295,
+      "attr_id_0indexed": 294,
+      "name": "has_crown_color::brown",
+      "group": "has_crown_color",
+      "value": "brown",
+      "n_classes_present": 26
+    },
+    {
+      "concept_id": 101,
+      "attr_id_1indexed": 299,
+      "attr_id_0indexed": 298,
+      "name": "has_crown_color::grey",
+      "group": "has_crown_color",
+      "value": "grey",
+      "n_classes_present": 20
+    },
+    {
+      "concept_id": 102,
+      "attr_id_1indexed": 300,
+      "attr_id_0indexed": 299,
+      "name": "has_crown_color::yellow",
+      "group": "has_crown_color",
+      "value": "yellow",
+      "n_classes_present": 11
+    },
+    {
+      "concept_id": 103,
+      "attr_id_1indexed": 305,
+      "attr_id_0indexed": 304,
+      "name": "has_crown_color::black",
+      "group": "has_crown_color",
+      "value": "black",
+      "n_classes_present": 64
+    },
+    {
+      "concept_id": 104,
+      "attr_id_1indexed": 306,
+      "attr_id_0indexed": 305,
+      "name": "has_crown_color::white",
+      "group": "has_crown_color",
+      "value": "white",
+      "n_classes_present": 16
+    },
+    {
+      "concept_id": 105,
+      "attr_id_1indexed": 309,
+      "attr_id_0indexed": 308,
+      "name": "has_wing_pattern::solid",
+      "group": "has_wing_pattern",
+      "value": "solid",
+      "n_classes_present": 56
+    },
+    {
+      "concept_id": 106,
+      "attr_id_1indexed": 311,
+      "attr_id_0indexed": 310,
+      "name": "has_wing_pattern::striped",
+      "group": "has_wing_pattern",
+      "value": "striped",
+      "n_classes_present": 31
+    },
+    {
+      "concept_id": 107,
+      "attr_id_1indexed": 312,
+      "attr_id_0indexed": 311,
+      "name": "has_wing_pattern::multi-colored",
+      "group": "has_wing_pattern",
+      "value": "multi-colored",
+      "n_classes_present": 42
+    }
+  ]
+}
