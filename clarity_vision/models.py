@@ -114,70 +114,91 @@ class GlobalCBM(nn.Module):
 class VisualCLARITY(nn.Module):
     """Spatially-grounded concept bottleneck model.
 
-    Each concept reads its score from its TOP-K most relevant patch tokens
-    (selected by a learned per-concept attention weight vector), rather than
-    mean-pooling all patches.  This is the proposed model.
+    Pipeline:
+        patch_tokens (B,N,D)
+          -> per-concept attention scores a_c(i) = w_c . token_i      (B,C,N)
+          -> HARD top-k selection (0/1 mask, non-differentiable)        (B,C,N)
+          -> PLAIN AVERAGE of selected tokens                          (B,C,D)
+          -> per-concept linear scorer -> concept score                (B,C)
+          -> classifier                                                 (B,K)
 
-    Architecture:
-        patch_tokens (B,256,768)
-            -> per-concept attention scores a_c(i) = w_c · token_i  (B,C,N)
-            -> top-k mask per concept                                (B,C,k)
-            -> concept_score_c = mean over top-k of linear(token_i) (B,C)
-            -> classifier -> (B,K)
+    The selector (`attn_weights`) is NOT trained through the main classification
+    loss — the classification path runs through a HARD top-k selection
+    (non-differentiable), so the selector gets ZERO gradient from cls_loss. It is
+    trained ENTIRELY by the AUXILIARY losses on the continuous `attn` scores
+    (sparsity + spatial continuity). forward() therefore RETURNS `attn` so
+    loss_fn can compute those terms; if their weights are 0, the selector never
+    receives gradient and stays frozen at its random init — so the gradient-flow
+    test must FAIL (grad == 0) in that case.
+
+    concept_patch_map() returns the hard top-k binary mask for pointing-game
+    evaluation — that path is index-only and intentionally has no gradient.
     """
 
     def __init__(self, num_concepts: int, num_classes: int,
-                 embed_dim: int = 768, top_k: int = 8):
+                 embed_dim: int = 768, top_k: int = 8, grid_size: int = 16):
         super().__init__()
         self.num_concepts = num_concepts
         self.top_k = top_k
+        self.grid_size = grid_size  # 16x16 = 256 patches; used by continuity loss
 
-        # Per-concept patch attention weights: (C, D)
+        # Per-concept patch attention weights: (C, D) — the learnable selector.
         self.attn_weights = nn.Parameter(torch.randn(num_concepts, embed_dim) * 0.02)
 
-        # Per-concept linear scorer applied to each selected patch
+        # Per-concept linear scorer applied to the pooled selected patches.
         self.concept_proj = nn.Linear(embed_dim, num_concepts)
 
         self.classifier = nn.Linear(num_concepts, num_classes)
 
-    def forward(self, patch_tokens: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def forward(self, patch_tokens: torch.Tensor):
         """
         Args:
             patch_tokens: (B, N, D) pre-extracted DINOv2 patch tokens.
         Returns:
-            (logits, concept_scores): (B, K) and (B, C).
+            logits:         (B, K)
+            concept_scores: (B, C)
+            attn:           (B, C, N)  continuous selector scores (for aux losses)
         """
         B, N, D = patch_tokens.shape
         C = self.num_concepts
 
-        # Attention score for each patch per concept: (B, C, N)
+        # Continuous attention score for each patch per concept: (B, C, N).
+        # This is the gradient-carrying tensor — the aux losses act on it.
         attn = torch.einsum("cd,bnd->bcn", self.attn_weights, patch_tokens)
 
-        # Top-k patch indices per concept: (B, C, k)
-        _, topk_idx = attn.topk(self.top_k, dim=-1)
+        # --- HARD top-k selection (non-differentiable) ---
+        # We take indices only and build a 0/1 mask. The main loss does NOT flow
+        # to attn_weights through here — that is intentional: selection is a hard
+        # mask feeding a plain-average pool, so it carries no gradient.
+        _, topk_idx = attn.topk(self.top_k, dim=-1)          # (B, C, k)
+        mask = torch.zeros(B, C, N, device=patch_tokens.device, dtype=patch_tokens.dtype)
+        mask.scatter_(2, topk_idx, 1.0)                       # (B, C, N) in {0,1}
 
-        # Gather top-k tokens: (B, C, k, D)
-        idx_expanded = topk_idx.unsqueeze(-1).expand(B, C, self.top_k, D)
-        tokens_expanded = patch_tokens.unsqueeze(1).expand(B, C, N, D)
-        topk_tokens = tokens_expanded.gather(2, idx_expanded)  # (B, C, k, D)
+        # --- PLAIN AVERAGE pool of selected patches ---
+        # masked sum over patches / number selected. top_k is constant (=8) so
+        # the denominator is just top_k, but we divide by the actual mask sum to
+        # stay robust if N < top_k for any concept.
+        # pooled: (B, C, D)
+        masked_sum = torch.einsum("bcn,bnd->bcd", mask, patch_tokens)
+        counts = mask.sum(dim=-1, keepdim=True).clamp_min(1.0)  # (B, C, 1)
+        pooled = masked_sum / counts                           # (B, C, D)
 
-        # Project each token to concept space then mean over k
-        # concept_proj maps D -> C, but we only care about the diagonal
-        # So: proj = topk_tokens @ concept_proj.weight.T  (B, C, k, C)
-        # then select the c-th output for concept c
-        proj = topk_tokens @ self.concept_proj.weight.T  # (B, C, k, C)
-        diag_scores = proj.diagonal(dim1=1, dim2=3)       # (B, k, C) — diagonal over (C,C)
-        concept_scores = diag_scores.mean(dim=1)           # (B, C)
-        concept_scores = concept_scores + self.concept_proj.bias
+        # --- Per-concept score from its own pooled vector ---
+        # concept_proj.weight is (C, D); row c scores concept c. We want, for
+        # each concept c, score = pooled[:, c, :] . weight[c, :] + bias[c].
+        # einsum gives the per-concept diagonal directly (no (B,C,k,C) blowup).
+        concept_scores = torch.einsum("bcd,cd->bc", pooled, self.concept_proj.weight)
+        concept_scores = concept_scores + self.concept_proj.bias  # (B, C)
 
-        logits = self.classifier(concept_scores)
-        return logits, concept_scores
+        logits = self.classifier(concept_scores)               # (B, K)
+        return logits, concept_scores, attn
 
     @torch.no_grad()
     def concept_patch_map(self, patch_tokens: torch.Tensor) -> torch.Tensor:
         """Return binary mask (B, C, N) marking the top-k patches per concept.
 
-        Used at evaluation time to compute pointing-game localization score.
+        Eval-only — used for the pointing-game localization metric. Index-only,
+        intentionally no gradient.
         """
         B, N, D = patch_tokens.shape
         attn = torch.einsum("cd,bnd->bcn", self.attn_weights, patch_tokens)
@@ -188,31 +209,97 @@ class VisualCLARITY(nn.Module):
 
 
 # ---------------------------------------------------------------------------
-# Loss function (shared — Rule 4)
+# Loss function (shared by GlobalCBM and VisualCLARITY)
 # ---------------------------------------------------------------------------
+
+def _sparsity_loss(attn: torch.Tensor) -> torch.Tensor:
+    """Entropy-based sparsity on the FULL per-concept patch distribution.
+
+    attn: (B, C, N). Lower entropy => mass concentrated on few patches => more
+    sparse/localized. We softmax over the N patch dimension and return mean
+    entropy (to be MINIMIZED). Operates on all N scores so gradient can move the
+    selection, not just sharpen the already-selected patches.
+    """
+    probs = F.softmax(attn, dim=-1)                      # (B, C, N)
+    entropy = -(probs * torch.log(probs + 1e-8)).sum(dim=-1)  # (B, C)
+    return entropy.mean()
+
+
+def _continuity_loss(attn: torch.Tensor, grid_size: int = 16) -> torch.Tensor:
+    """Spatial-contiguity loss on the 2D patch grid.
+
+    attn: (B, C, N) with N == grid_size**2. We softmax to a soft spatial map,
+    reshape to (B, C, H, W), and penalize differences between each patch and its
+    right and down neighbors. Encourages selected patches to form a coherent
+    region — what the pointing-game rewards. Differentiable (acts on softmax),
+    so it contributes selector gradient too.
+    """
+    B, C, N = attn.shape
+    H = W = grid_size
+    if N != H * W:
+        # Grid assumption broken — skip rather than mis-compute. (Flag, don't hide.)
+        return attn.new_zeros(())
+    probs = F.softmax(attn, dim=-1).reshape(B, C, H, W)  # (B, C, H, W)
+    dh = (probs[:, :, 1:, :] - probs[:, :, :-1, :]).abs().mean()
+    dw = (probs[:, :, :, 1:] - probs[:, :, :, :-1]).abs().mean()
+    return dh + dw
+
 
 def loss_fn(
     logits: torch.Tensor,
     concept_scores: torch.Tensor,
     class_labels: torch.Tensor,
     concept_labels: torch.Tensor,
+    attn: Optional[torch.Tensor] = None,
     concept_loss_weight: float = 0.01,
-) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-    """Combined classification + concept alignment loss.
+    sparsity_weight: float = 0.0,
+    continuity_weight: float = 0.0,
+    grid_size: int = 16,
+) -> Tuple[torch.Tensor, dict]:
+    """Combined classification + concept + selector-auxiliary loss.
 
     Args:
-        logits: (B, K) class predictions.
-        concept_scores: (B, C) predicted concept activations.
-        class_labels: (B,) ground-truth class indices.
-        concept_labels: (B, C) ground-truth concept labels in {0, 1}.
-        concept_loss_weight: lambda weighting the concept auxiliary loss.
+        logits:            (B, K) class predictions.
+        concept_scores:    (B, C) predicted concept activations (logits).
+        class_labels:      (B,) ground-truth class indices.
+        concept_labels:    (B, C) ground-truth concept labels in {0, 1}.
+        attn:              (B, C, N) continuous selector scores from
+                           VisualCLARITY. Pass None for GlobalCBM (aux = 0).
+        concept_loss_weight:  lambda on the concept BCE.
+        sparsity_weight:      lambda on the selector sparsity loss. MUST be > 0
+                              for VisualCLARITY or the selector never learns.
+        continuity_weight:    lambda on the spatial-continuity loss.
+        grid_size:            patch grid side (16 for 16x16 = 256 patches).
     Returns:
-        (total_loss, cls_loss, concept_loss)
+        (total_loss, parts) where parts is a dict of the individual scalar terms
+        for logging — so you can SEE each term, not just the sum.
     """
     cls_loss = F.cross_entropy(logits, class_labels)
     concept_loss = F.binary_cross_entropy_with_logits(concept_scores, concept_labels)
-    total = cls_loss + concept_loss_weight * concept_loss
-    return total, cls_loss, concept_loss
+
+    if attn is not None:
+        sparsity = _sparsity_loss(attn)
+        continuity = _continuity_loss(attn, grid_size=grid_size)
+    else:
+        sparsity = concept_scores.new_zeros(())
+        continuity = concept_scores.new_zeros(())
+
+
+    total = (
+        cls_loss
+        + concept_loss_weight * concept_loss
+        + sparsity_weight * sparsity
+        + continuity_weight * continuity
+    )
+
+    parts = {
+        "total": total.detach(),
+        "cls": cls_loss.detach(),
+        "concept": concept_loss.detach(),
+        "sparsity": sparsity.detach(),
+        "continuity": continuity.detach(),
+    }
+    return total, parts
 
 
 # ---------------------------------------------------------------------------
@@ -237,7 +324,10 @@ def gradcam_concept_maps(
     with torch.enable_grad():
         patch_tokens = backbone(images)
         patch_tokens.retain_grad()
-        _, concept_scores = model(patch_tokens)
+        # GlobalCBM returns (logits, concept_scores); VisualCLARITY returns
+        # (logits, concept_scores, attn). Index by position to support both.
+        outputs = model(patch_tokens)
+        concept_scores = outputs[1]
         score = concept_scores[:, concept_idx].sum()
         score.backward()
 
