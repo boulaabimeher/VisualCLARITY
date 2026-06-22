@@ -1,0 +1,61 @@
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.coverage
+.ipynb_checkpoints/
+
+# ---------------------------------------------------------------------------
+# Virtual environments
+# ---------------------------------------------------------------------------
+.venv/
+venv/
+
+# ---------------------------------------------------------------------------
+# OS / editor cruft
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local-only Claude Code settings (machine-specific)
+.claude/settings.local.json
+
+# ---------------------------------------------------------------------------
+# Data, weights, and model checkpoints (never committed — large / external)
+# ---------------------------------------------------------------------------
+dataset/
+weights/
+vendor/
+checkpoints/
+runs/
+outputs/checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.safetensors
+
+# ---------------------------------------------------------------------------
+# Cached features and arrays (rebuilt by step5 — ~8.7 GB)
+# ---------------------------------------------------------------------------
+outputs/cache/
+*.npy
+*.npz
+
+# ---------------------------------------------------------------------------
+# Large / regenerable generated outputs
+#   Kept in the repo: outputs/metrics/fig_*.png, outputs/metrics/metrics.json
+#   (small figures + numbers cited by report/). Everything below regenerates
+#   from the pipeline (step7b, step9) and is excluded to keep the repo lean.
+# ---------------------------------------------------------------------------
+outputs/viz/
+outputs/overlays/
+outputs/metrics/analysis_dump.json
+
+# Stray packaging artifact occasionally emitted into the tree
+__init__.py

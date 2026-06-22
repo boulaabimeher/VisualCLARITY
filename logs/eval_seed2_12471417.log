@@ -1,0 +1,13 @@
+============================================================
+STEP 8 — GATE EVALUATION
+============================================================
+GlobalCBM      top-1 accuracy: 0.7240
+VisualCLARITY  top-1 accuracy: 0.8624
+------------------------------------------------------------
+Pointing game (VisualCLARITY only — GlobalCBM has no spatial selection)
+  VisualCLARITY pointing-game acc: 0.1543
+  Random-selection baseline:       0.0161
+  Lift over random:                +0.1382
+  Best-localized concepts: [(102, 0.864), (100, 0.835), (12, 0.743), (55, 0.663), (25, 0.656)]
+  Worst-localized concepts: [(30, 0.0), (35, 0.0), (46, 0.0), (65, 0.0), (96, 0.0)]
+============================================================

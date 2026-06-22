@@ -92,7 +92,7 @@ step7: guard outputs/concept_part_map.json
 
 .PHONY: step8
 step8: guard
-	$(PYTHON) scripts/step8_gate_eval.py
+	$(PYTHON) scripts/step8_gate_eval.py --config configs/gate.yaml
 
 # ---------------------------------------------------------------------------
 # Tests

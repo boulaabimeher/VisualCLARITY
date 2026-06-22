@@ -8,7 +8,7 @@ Usage:
     python scripts/step5_cache_features.py [--config configs/gate.yaml]
     python scripts/step5_cache_features.py --limit 4   # tiny smoke-test
 
-IMPORTANT (Rule 1): this script reads ONLY images and image_ids.
+Training/evaluation boundary: this script reads ONLY images and image_ids.
 It never reads part annotations or body-joint locations of any kind.
 
 NOTE: the full run requires a GPU and is an overnight cluster job.

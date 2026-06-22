@@ -32,8 +32,17 @@ epochs: 100
 batch_size: 64
 lr: 0.001
 weight_decay: 1.0e-4
-concept_loss_weight: 0.01
+concept_loss_weight: 0.1
 lr_scheduler: cosine
+
+# --- VisualCLARITY selector supervision ---
+# These are not optional regularizers: they are the SOLE supervision for the
+# selector (attn_weights). The classification path uses a hard, non-differentiable
+# top-k selection, so cls_loss gives the selector ZERO gradient. The selector
+# trains ENTIRELY through these two auxiliary losses on the continuous attention
+# scores. Both must be > 0, or the selector receives no gradient and never trains.
+sparsity_weight: 0.1
+continuity_weight: 0.05
 
 # --- evaluation ---
 pointing_game_tolerance: 1

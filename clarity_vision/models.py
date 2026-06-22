@@ -79,23 +79,54 @@ class DINOv2Backbone(nn.Module):
 # Concept bottleneck models
 # ---------------------------------------------------------------------------
 
+def _build_concept_mapper(embed_dim: int, num_concepts: int,
+                          dropout_rate: float = 0.1) -> nn.Sequential:
+    """Build the shared concept head: a 2-layer MLP mapping a pooled patch
+    vector to concept logits.
+
+    Linear -> LayerNorm -> ReLU -> Dropout -> Linear, with hidden = embed_dim // 2.
+    Both GlobalCBM and VisualCLARITY use this exact head, so the concept head is
+    identical across models; only the patch-reading step that produces the pooled
+    vector differs between them.
+    """
+    hidden_dim = embed_dim // 2
+    mapper = nn.Sequential(
+        nn.Linear(embed_dim, hidden_dim),
+        nn.LayerNorm(hidden_dim),
+        nn.ReLU(),
+        nn.Dropout(dropout_rate),
+        nn.Linear(hidden_dim, num_concepts),
+    )
+    # Initialise Linear weights from normal(0, 0.02), biases at zero.
+    for m in mapper:
+        if isinstance(m, nn.Linear):
+            nn.init.normal_(m.weight, mean=0.0, std=0.02)
+            nn.init.zeros_(m.bias)
+    return mapper
+
+
 class GlobalCBM(nn.Module):
     """Baseline concept bottleneck model.
 
-    Concept scores come from mean-pooling ALL 256 patch tokens, then a linear
-    projection.  The spatial origin of each concept is therefore undefined —
-    this is the control model for the pointing-game comparison.
+    Concept scores come from mean-pooling ALL 256 patch tokens, then the shared
+    concept head (2-layer MLP). The spatial origin of each concept is therefore
+    undefined — this is the un-grounded control model for the pointing-game
+    comparison.
 
     Architecture:
         patch_tokens (B,256,768)
             -> mean_pool -> (B,768)
-            -> concept_proj -> (B,C)  [concept bottleneck]
-            -> classifier  -> (B,K)   [class logits]
+            -> concept_mapper -> (B,C)  [concept bottleneck, LOGITS]
+            -> sigmoid -> classifier  -> (B,K)   [class logits]
+
+    forward returns (logits, concept_scores) where concept_scores are LOGITS
+    (pre-sigmoid) for loss_fn; the classifier internally reads sigmoid(scores).
     """
 
-    def __init__(self, num_concepts: int, num_classes: int, embed_dim: int = 768):
+    def __init__(self, num_concepts: int, num_classes: int,
+                 embed_dim: int = 768, dropout_rate: float = 0.1):
         super().__init__()
-        self.concept_proj = nn.Linear(embed_dim, num_concepts)
+        self.concept_mapper = _build_concept_mapper(embed_dim, num_concepts, dropout_rate)
         self.classifier = nn.Linear(num_concepts, num_classes)
 
     def forward(self, patch_tokens: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
@@ -103,12 +134,13 @@ class GlobalCBM(nn.Module):
         Args:
             patch_tokens: (B, N, D) pre-extracted DINOv2 patch tokens.
         Returns:
-            (logits, concept_scores): (B, K) and (B, C).
+            (logits, concept_scores): (B, K) and (B, C). concept_scores are LOGITS.
         """
-        pooled = patch_tokens.mean(dim=1)          # (B, D)
-        concept_scores = self.concept_proj(pooled)  # (B, C)
-        logits = self.classifier(concept_scores)    # (B, K)
-        return logits, concept_scores
+        pooled = patch_tokens.mean(dim=1)              # (B, D) — flat mean over patches
+        concept_scores = self.concept_mapper(pooled)   # (B, C) LOGITS
+        concept_probs = torch.sigmoid(concept_scores)  # (B, C) concept probabilities
+        logits = self.classifier(concept_probs)        # (B, K)
+        return logits, concept_scores                  # return LOGITS for loss_fn
 
 
 class VisualCLARITY(nn.Module):
@@ -119,24 +151,31 @@ class VisualCLARITY(nn.Module):
           -> per-concept attention scores a_c(i) = w_c . token_i      (B,C,N)
           -> HARD top-k selection (0/1 mask, non-differentiable)        (B,C,N)
           -> PLAIN AVERAGE of selected tokens                          (B,C,D)
-          -> per-concept linear scorer -> concept score                (B,C)
-          -> classifier                                                 (B,K)
+          -> shared ConceptMapper (per concept, diagonal) -> score     (B,C)
+          -> sigmoid -> classifier                                      (B,K)
+
+    The contribution is this per-concept selection mechanism: hard top-k patch
+    selection, a plain-average pool over the selected patches, and a selector
+    (`attn_weights`) supervised only by auxiliary losses. The concept head and
+    classifier are the shared modules, identical to GlobalCBM's, so the only
+    difference between the two models is how patches are read.
 
     The selector (`attn_weights`) is NOT trained through the main classification
     loss — the classification path runs through a HARD top-k selection
     (non-differentiable), so the selector gets ZERO gradient from cls_loss. It is
     trained ENTIRELY by the AUXILIARY losses on the continuous `attn` scores
     (sparsity + spatial continuity). forward() therefore RETURNS `attn` so
-    loss_fn can compute those terms; if their weights are 0, the selector never
-    receives gradient and stays frozen at its random init — so the gradient-flow
-    test must FAIL (grad == 0) in that case.
+    loss_fn can compute those terms; if both auxiliary weights are 0, the selector
+    receives no gradient and stays at its random init. The gradient-flow test
+    pins down both directions of this property.
 
     concept_patch_map() returns the hard top-k binary mask for pointing-game
     evaluation — that path is index-only and intentionally has no gradient.
     """
 
     def __init__(self, num_concepts: int, num_classes: int,
-                 embed_dim: int = 768, top_k: int = 8, grid_size: int = 16):
+                 embed_dim: int = 768, top_k: int = 8, grid_size: int = 16,
+                 dropout_rate: float = 0.1):
         super().__init__()
         self.num_concepts = num_concepts
         self.top_k = top_k
@@ -145,8 +184,8 @@ class VisualCLARITY(nn.Module):
         # Per-concept patch attention weights: (C, D) — the learnable selector.
         self.attn_weights = nn.Parameter(torch.randn(num_concepts, embed_dim) * 0.02)
 
-        # Per-concept linear scorer applied to the pooled selected patches.
-        self.concept_proj = nn.Linear(embed_dim, num_concepts)
+        # Concept head — now the shared 2-layer ConceptMapper, identical to GlobalCBM's.
+        self.concept_mapper = _build_concept_mapper(embed_dim, num_concepts, dropout_rate)
 
         self.classifier = nn.Linear(num_concepts, num_classes)
 
@@ -156,7 +195,7 @@ class VisualCLARITY(nn.Module):
             patch_tokens: (B, N, D) pre-extracted DINOv2 patch tokens.
         Returns:
             logits:         (B, K)
-            concept_scores: (B, C)
+            concept_scores: (B, C)  LOGITS (pre-sigmoid) for loss_fn
             attn:           (B, C, N)  continuous selector scores (for aux losses)
         """
         B, N, D = patch_tokens.shape
@@ -183,14 +222,16 @@ class VisualCLARITY(nn.Module):
         counts = mask.sum(dim=-1, keepdim=True).clamp_min(1.0)  # (B, C, 1)
         pooled = masked_sum / counts                           # (B, C, D)
 
-        # --- Per-concept score from its own pooled vector ---
-        # concept_proj.weight is (C, D); row c scores concept c. We want, for
-        # each concept c, score = pooled[:, c, :] . weight[c, :] + bias[c].
-        # einsum gives the per-concept diagonal directly (no (B,C,k,C) blowup).
-        concept_scores = torch.einsum("bcd,cd->bc", pooled, self.concept_proj.weight)
-        concept_scores = concept_scores + self.concept_proj.bias  # (B, C)
+        # --- Per-concept score via the SHARED concept mapper ---
+        # The mapper expects (.., D) and outputs (.., C); we run it on every
+        # concept's pooled vector and take the diagonal (concept c's score from
+        # concept c's pooled vec). Flatten (B,C,D)->(B*C,D), map, reshape, diag.
+        flat = pooled.reshape(B * C, D)
+        mapped = self.concept_mapper(flat).reshape(B, C, C)    # (B, C_pooled, C_out)
+        concept_scores = mapped.diagonal(dim1=1, dim2=2)       # (B, C) LOGITS
 
-        logits = self.classifier(concept_scores)               # (B, K)
+        concept_probs = torch.sigmoid(concept_scores)          # (B, C) concept probabilities
+        logits = self.classifier(concept_probs)                # (B, K)
         return logits, concept_scores, attn
 
     @torch.no_grad()
@@ -237,7 +278,8 @@ def _continuity_loss(attn: torch.Tensor, grid_size: int = 16) -> torch.Tensor:
     B, C, N = attn.shape
     H = W = grid_size
     if N != H * W:
-        # Grid assumption broken — skip rather than mis-compute. (Flag, don't hide.)
+        # Patch count is not a perfect square — the 2D grid assumption does not
+        # hold, so skip the continuity term rather than compute it on a wrong grid.
         return attn.new_zeros(())
     probs = F.softmax(attn, dim=-1).reshape(B, C, H, W)  # (B, C, H, W)
     dh = (probs[:, :, 1:, :] - probs[:, :, :-1, :]).abs().mean()

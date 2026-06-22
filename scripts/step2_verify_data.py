@@ -5,9 +5,9 @@ For each of 3 selected images, renders the bird photo at 224x224 with:
   - A red dot on every VISIBLE part annotation (beak, eye, wing, etc.).
   - The patch cell containing each annotation highlighted with a coloured border.
 
-This is VISUAL PROOF that the pixel → patch coordinate math is correct.
-Part annotations are read here for diagnostic purposes only — this script
-is not a training component (Rule 1).
+This is a visual check that the pixel → patch coordinate math is correct.
+Part annotations are read here for diagnostic purposes only — this is a
+verification script, not a training component.
 
 Usage:
     python scripts/step2_verify_data.py

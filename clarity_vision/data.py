@@ -17,7 +17,7 @@ Dataset layout (set dataset_path in gate.yaml to the outer dir):
         parts.txt                          <- part_id -> name  (EVAL ONLY)
         part_locs.txt                      <- image_id part_id x y visible  (EVAL ONLY)
 
-IMPORTANT: part_locs / part annotations are NEVER read by training code (Rule 1).
+IMPORTANT: part_locs / part annotations are NEVER read by training code.
 They are exposed here only through eval-gated helpers clearly labelled EVAL_ONLY.
 """
 
